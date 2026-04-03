@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+venv/
+.git/
+.idea/
+.vscode/
+# We keep the model for inference in Docker
+# mnist_cnn_model.h5
