@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MNIST Digit Recognition</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Handwritten Digit Recognition</h1>
+        <p class="subtitle">Draw a digit (0-9) inside the box</p>
+        
+        <div class="canvas-container">
+            <canvas id="digitCanvas" width="280" height="280"></canvas>
+        </div>
+        
+        <div class="controls">
+            <button id="clearBtn" class="secondary-btn">Clear</button>
+            <button id="predictBtn" class="primary-btn">Predict</button>
+        </div>
+        
+        <div id="resultContainer" class="result-container hidden">
+            <h3>Prediction: <span id="predictionResult">-</span></h3>
+            <p>Confidence: <span id="confidenceValue">-</span>%</p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

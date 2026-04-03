@@ -1,0 +1,205 @@
+:root {
+    --primary-color: #6366f1;
+    --primary-hover: #4f46e5;
+    --secondary-color: #f43f5e;
+    --bg-dark: #0f172a;
+    --card-bg: rgba(30, 41, 59, 0.7);
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --accent-glow: rgba(99, 102, 241, 0.4);
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Outfit', sans-serif;
+}
+
+body {
+    background: radial-gradient(circle at top left, #1e1b4b, #0f172a);
+    color: var(--text-primary);
+    display: flex;
+    justify-content: center;
+    /* align-items: center;  <-- Removed to prevent cutoff on small screens */
+    min-height: 100vh;
+    padding: 2rem 1rem;
+}
+
+/* Background animated blobs */
+body::before, body::after {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: -1;
+    animation: blob-float 20s infinite alternate;
+}
+
+body::before {
+    background: rgba(99, 102, 241, 0.15);
+    top: 10%;
+    left: 10%;
+}
+
+body::after {
+    background: rgba(244, 63, 94, 0.1);
+    bottom: 10%;
+    right: 10%;
+    animation-delay: -10s;
+}
+
+@keyframes blob-float {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(50px, 100px) scale(1.2); }
+}
+
+.container {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    padding: 3rem 2rem;
+    border-radius: 2rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    width: 100%;
+    max-width: 440px;
+    border: 1px solid var(--glass-border);
+    animation: fadeIn 0.8s ease-out;
+    margin: auto; /* Centering while allowing for full-height scrolling */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #fff 30%, #6366f1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 600;
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    font-size: 0.95rem;
+}
+
+.canvas-container {
+    background-color: #ffffff;
+    border-radius: 1.25rem;
+    padding: 12px;
+    margin-bottom: 2.5rem;
+    box-shadow: 0 0 30px var(--accent-glow);
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.canvas-container:hover {
+    transform: scale(1.02);
+}
+
+canvas {
+    border: 1px solid #e2e8f0;
+    border-radius: 0.75rem;
+    cursor: crosshair;
+    display: block;
+    background: white;
+}
+
+.controls {
+    display: flex;
+    gap: 1.25rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+button {
+    padding: 0.9rem 1.8rem;
+    border-radius: 1rem;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    flex: 1;
+    font-size: 1rem;
+}
+
+.primary-btn {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+    color: white;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.primary-btn:hover {
+    box-shadow: 0 8px 25px var(--accent-glow);
+    transform: translateY(-3px);
+}
+
+.primary-btn:active {
+    transform: translateY(-1px);
+}
+
+.secondary-btn {
+    background-color: rgba(148, 163, 184, 0.1);
+    color: var(--text-secondary);
+    border: 1px solid var(--glass-border);
+}
+
+.secondary-btn:hover {
+    background-color: rgba(148, 163, 184, 0.2);
+    color: white;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.result-container {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--glass-border);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.result-container.hidden {
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
+}
+
+#predictionResult {
+    color: #4ade80;
+    font-size: 3rem;
+    margin-left: 0.75rem;
+    font-weight: 700;
+    text-shadow: 0 0 20px rgba(74, 222, 128, 0.4);
+}
+
+.result-container p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+#confidenceValue {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* Loading state animation */
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    animation: pulse 1.5s infinite;
+}
